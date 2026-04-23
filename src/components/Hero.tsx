@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { Icons } from './Icons';
+import { submitQuoteAction } from '@/app/actions';
 
 const WA_LINK_HERO = "https://api.whatsapp.com/send/?phone=5519989769353&text=Ol%C3%A1%2C%20gostaria%20de%20um%20or%C3%A7amento.";
 
@@ -46,12 +47,30 @@ function HeroSlideshow() {
 function HeroMiniForm() {
   const [form, setForm] = useState({ name: "", phone: "", local: "Residência", problem: "Gostaria de uma avaliação" });
   const [sent, setSent] = useState(false);
+  const [isPending, startTransition] = React.useTransition();
+
   const update = (k: string, v: string) => setForm(s => ({ ...s, [k]: v }));
-  const submit = (e: React.FormEvent) => {
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.name.trim() || form.phone.replace(/\D/g,'').length < 10) return;
-    setSent(true);
+    
+    const formData = new FormData();
+    formData.append('name', form.name);
+    formData.append('phone', form.phone);
+    formData.append('local', form.local);
+    formData.append('problem', form.problem);
+
+    startTransition(async () => {
+      const result = await submitQuoteAction(formData);
+      if (result.success) {
+        setSent(true);
+      } else {
+        alert(result.message || "Erro ao enviar. Tente novamente.");
+      }
+    });
   };
+
   return (
     <form className="hero-mini-form" onSubmit={submit}>
       {sent ? (
@@ -61,22 +80,44 @@ function HeroMiniForm() {
           <div className="hero-mini-fields">
             <div className="hero-mini-field">
               <label>Nome</label>
-              <input type="text" placeholder="Digite seu nome" value={form.name} onChange={e => update("name", e.target.value)} required/>
+              <input 
+                type="text" 
+                placeholder="Digite seu nome" 
+                value={form.name} 
+                onChange={e => update("name", e.target.value)} 
+                required 
+                disabled={isPending}
+              />
             </div>
             <div className="hero-mini-field">
               <label>Telefone</label>
-              <input type="tel" placeholder="Digite seu telefone" value={form.phone} onChange={e => update("phone", e.target.value)} required/>
+              <input 
+                type="tel" 
+                placeholder="Digite seu telefone" 
+                value={form.phone} 
+                onChange={e => update("phone", e.target.value)} 
+                required 
+                disabled={isPending}
+              />
             </div>
             <div className="hero-mini-field">
               <label>Local</label>
-              <select value={form.local} onChange={e => update("local", e.target.value)}>
+              <select 
+                value={form.local} 
+                onChange={e => update("local", e.target.value)}
+                disabled={isPending}
+              >
                 <option>Residência</option><option>Comércio</option>
                 <option>Indústria</option><option>Condomínio</option><option>Outros</option>
               </select>
             </div>
             <div className="hero-mini-field">
               <label>Problema</label>
-              <select value={form.problem} onChange={e => update("problem", e.target.value)}>
+              <select 
+                value={form.problem} 
+                onChange={e => update("problem", e.target.value)}
+                disabled={isPending}
+              >
                 <option>Gostaria de uma avaliação</option>
                 <option>Cupim</option><option>Escorpião</option>
                 <option>Baratas</option><option>Carrapatos e Pulgas</option><option>Ratos</option>
@@ -85,7 +126,13 @@ function HeroMiniForm() {
               </select>
             </div>
           </div>
-          <button type="submit" className="hero-mini-submit">Solicitar Orçamento Grátis</button>
+          <button 
+            type="submit" 
+            className={`hero-mini-submit ${isPending ? 'loading' : ''}`}
+            disabled={isPending}
+          >
+            {isPending ? 'Enviando...' : 'Solicitar Orçamento Grátis'}
+          </button>
         </>
       )}
     </form>
