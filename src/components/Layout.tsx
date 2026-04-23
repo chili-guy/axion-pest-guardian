@@ -127,7 +127,7 @@ export function Footer() {
           <div>
             <h5>Contato</h5>
             <div className="contact-line"><Icons.Phone width="16" height="16"/><div>(19) 98976-9353<br/><small style={{opacity:.6}}>WhatsApp disponível 24h</small></div></div>
-            <div className="contact-line"><Icons.Mail width="16" height="16"/><div>comercial@grupoaxionbrasil.com.br</div></div>
+            <div className="contact-line"><Icons.Mail width="16" height="16"/><div>comercial@axionenviromental.com.br</div></div>
             <div className="contact-line"><Icons.Pin width="16" height="16"/><div>Brasil · EUA · Portugal</div></div>
             <div className="contact-line"><Icons.Clock width="16" height="16"/><div>Atendimento 24h emergencial</div></div>
           </div>
