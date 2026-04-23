@@ -419,18 +419,19 @@ section { padding: 96px 0; }
 .segments { background: var(--ax-blue-50); }
 .segments-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .segment-card {
-  position: relative; background: #fff; border-radius: var(--radius-lg); padding: 32px;
+  position: relative; background: #fff; border-radius: var(--radius-lg); padding: 40px 32px;
   border: 1px solid var(--ax-line); transition: transform .2s, box-shadow .2s, border-color .2s;
   overflow: hidden;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
 }
 .segment-card:hover {
   transform: translateY(-4px); box-shadow: var(--shadow);
   border-color: var(--ax-blue-light);
 }
 .segment-card .icon {
-  width: 56px; height: 56px; border-radius: 16px;
+  width: 60px; height: 60px; border-radius: 18px;
   background: var(--ax-blue-50); color: var(--ax-blue);
-  display: grid; place-items: center; margin-bottom: 20px;
+  display: grid; place-items: center; margin-bottom: 24px;
 }
 .segment-card h3 { margin-bottom: 8px; color: var(--ax-navy); }
 .segment-card p { color: var(--ax-gray-dark); font-size: .95rem; }
@@ -524,6 +525,8 @@ section { padding: 96px 0; }
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
   gap: 20px;
   position: relative;
   overflow: hidden;
@@ -560,6 +563,7 @@ section { padding: 96px 0; }
 .pest-tags {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
   margin-top: auto;
   padding-top: 16px;
@@ -579,8 +583,11 @@ section { padding: 96px 0; }
 
 .pest-footer {
   margin-top: 24px;
+  width: 100%;
   padding-top: 20px;
   border-top: 1px solid rgba(255,255,255,.06);
+  display: flex;
+  justify-content: center;
 }
 
 .pest-cta-link {
@@ -593,6 +600,7 @@ section { padding: 96px 0; }
   cursor: pointer;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   padding: 0;
   transition: all .3s ease;
