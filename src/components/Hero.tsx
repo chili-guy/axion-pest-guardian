@@ -49,7 +49,17 @@ function HeroMiniForm() {
   const [sent, setSent] = useState(false);
   const [isPending, startTransition] = React.useTransition();
 
-  const update = (k: string, v: string) => setForm(s => ({ ...s, [k]: v }));
+  const maskPhone = (v: string) => {
+    return v.replace(/\D/g, "")
+      .replace(/^(\d{2})(\d)/g, "($1) $2")
+      .replace(/(\d)(\d{4})$/, "$1-$2")
+      .substring(0, 15);
+  };
+
+  const update = (k: string, v: string) => {
+    const finalVal = k === 'phone' ? maskPhone(v) : v;
+    setForm(s => ({ ...s, [k]: finalVal }));
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();

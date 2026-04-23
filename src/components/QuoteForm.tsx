@@ -8,8 +8,16 @@ export function QuoteForm({ compact }: { compact?: boolean }) {
   const [sent, setSent] = useState(false);
   const [isPending, startTransition] = useTransition();
 
+  const maskPhone = (v: string) => {
+    return v.replace(/\D/g, "")
+      .replace(/^(\d{2})(\d)/g, "($1) $2")
+      .replace(/(\d)(\d{4})$/, "$1-$2")
+      .substring(0, 15);
+  };
+
   const update = (k: string, v: string) => { 
-    setForm(s => ({ ...s, [k]: v })); 
+    const finalVal = k === 'phone' ? maskPhone(v) : v;
+    setForm(s => ({ ...s, [k]: finalVal })); 
     setErrors((e: any) => ({ ...e, [k]: null })); 
   };
 
