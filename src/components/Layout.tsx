@@ -100,7 +100,7 @@ export function Footer() {
             </div>
             <p style={{marginTop:-40}}>Empresa especializada em controle de pragas e soluções ambientais. Atendemos residências, empresas e indústrias no Brasil, EUA e Portugal.</p>
             <div className="socials">
-              <a href="#" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              <a href="https://www.instagram.com/grupoaxionbrasil" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
               <a href={WA_LINK} target="_blank" rel="noopener" aria-label="WhatsApp"><Icons.Whatsapp width="16" height="16"/></a>
             </div>
           </div>
