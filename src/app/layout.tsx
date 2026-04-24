@@ -13,8 +13,7 @@ export const metadata: Metadata = {
   description: "Eliminamos pragas com produtos certificados pela ANVISA, equipe técnica especializada e garantia total no serviço.",
 };
 
-// Aqui você poderá inserir suas tags de marketing (GTM, GA4, etc)
-const GTM_ID = ""; // Insira seu ID do GTM aqui, ex: GTM-XXXXXX
+const GTM_ID = "GTM-567Q7VZM";
 
 
 export default function RootLayout({
