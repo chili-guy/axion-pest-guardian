@@ -91,10 +91,12 @@ export function Quote() {
               <div className="quote-feat"><Icons.Check width="18" height="18"/> <span>Produtos certificados ANVISA</span></div>
               <div className="quote-feat"><Icons.Check width="18" height="18"/> <span>Garantia documentada</span></div>
             </div>
-            <div style={{marginTop:28, paddingTop:24, borderTop:'1px solid var(--ax-line)', display:'flex', gap:20, alignItems:'center', flexWrap:'wrap'}}>
-              <div style={{fontSize:13, color:'var(--ax-gray)'}}>Prefere falar direto?</div>
-              <a href={WA_LINK} target="_blank" rel="noopener" className="btn btn-blue"><Icons.Whatsapp width="16" height="16"/> WhatsApp</a>
-              <a href="tel:+5519989769353" className="btn btn-ghost"><Icons.Phone width="16" height="16"/> (19) 98976-9353</a>
+            <div style={{marginTop:28, paddingTop:24, borderTop:'1px solid var(--ax-line)'}}>
+              <div style={{fontSize:13, color:'var(--ax-gray)', marginBottom:12}}>Prefere falar direto?</div>
+              <div style={{display:'flex', gap:12, flexWrap:'wrap'}}>
+                <a href={WA_LINK} target="_blank" rel="noopener" className="btn btn-blue"><Icons.Whatsapp width="16" height="16"/> WhatsApp</a>
+                <a href="tel:+5519989769353" className="btn btn-ghost"><Icons.Phone width="16" height="16"/> (19) 98976-9353</a>
+              </div>
             </div>
           </div>
           <div>
