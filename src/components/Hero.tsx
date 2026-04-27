@@ -72,7 +72,7 @@ function HeroMiniForm() {
     formData.append('local', form.local);
     formData.append('problem', form.problem);
 
-    router.push('/contato-obrigado');
+    window.location.href = '/contato-obrigado';
     submitQuoteAction(formData).catch(() => {});
   };
 

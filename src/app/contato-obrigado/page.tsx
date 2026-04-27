@@ -135,7 +135,7 @@ export default function ContatoObrigado() {
           z-index: 10;
         }
         .obrigado-nav img {
-          height: 36px;
+          height: 56px;
           width: auto;
           object-fit: contain;
         }
