@@ -1,11 +1,12 @@
 'use client';
 import React, { useState, useTransition } from 'react';
+import { useRouter } from 'next/navigation';
 import { submitQuoteAction } from '@/app/actions';
 
 export function QuoteForm({ compact }: { compact?: boolean }) {
+  const router = useRouter();
   const [form, setForm] = useState({ name: "", phone: "", local: "", problem: "" });
   const [errors, setErrors] = useState<any>({});
-  const [sent, setSent] = useState(false);
   const [isPending, startTransition] = useTransition();
 
   const maskPhone = (v: string) => {
@@ -43,24 +44,12 @@ export function QuoteForm({ compact }: { compact?: boolean }) {
     startTransition(async () => {
       const result = await submitQuoteAction(formData);
       if (result.success) {
-        setSent(true);
+        router.push('/contato-obrigado');
       } else {
         alert(result.message || "Erro ao enviar. Tente novamente.");
       }
     });
   };
-
-  if (sent) {
-    return (
-      <div className="quote-card">
-        <div className="form-success">
-          <div className="success-icon">✓</div>
-          <h3>Solicitação enviada!</h3>
-          <p>Retornaremos em até 30 minutos no telefone informado.</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <form className="quote-card" onSubmit={submit}>
