@@ -19,7 +19,7 @@ export default function ContatoObrigado() {
       <div className="obrigado-bg-2" />
 
       <nav className="obrigado-nav">
-        <img src="/assets/logo-white.png" alt="Axion Environmental" height={36} />
+        <img src="/assets/logo-axion-light.png" alt="Axion Environmental" style={{ height: 36, width: 'auto' }} />
       </nav>
 
       <main className="obrigado-main">

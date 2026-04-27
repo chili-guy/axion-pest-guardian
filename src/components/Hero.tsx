@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Icons } from './Icons';
 import { submitQuoteAction } from '@/app/actions';
 
@@ -45,8 +46,8 @@ function HeroSlideshow() {
 }
 
 function HeroMiniForm() {
+  const router = useRouter();
   const [form, setForm] = useState({ name: "", phone: "", local: "Residência", problem: "Gostaria de uma avaliação" });
-  const [sent, setSent] = useState(false);
   const [isPending, startTransition] = React.useTransition();
 
   const maskPhone = (v: string) => {
@@ -71,80 +72,68 @@ function HeroMiniForm() {
     formData.append('local', form.local);
     formData.append('problem', form.problem);
 
-    startTransition(async () => {
-      const result = await submitQuoteAction(formData);
-      if (result.success) {
-        setSent(true);
-      } else {
-        alert(result.message || "Erro ao enviar. Tente novamente.");
-      }
-    });
+    router.push('/contato-obrigado');
+    submitQuoteAction(formData).catch(() => {});
   };
 
   return (
     <form className="hero-mini-form" onSubmit={submit}>
-      {sent ? (
-        <div className="hero-mini-success">✓ Recebemos sua solicitação! Retornaremos em até 30 minutos.</div>
-      ) : (
-        <>
-          <div className="hero-mini-fields">
-            <div className="hero-mini-field">
-              <label>Nome</label>
-              <input 
-                type="text" 
-                placeholder="Digite seu nome" 
-                value={form.name} 
-                onChange={e => update("name", e.target.value)} 
-                required 
-                disabled={isPending}
-              />
-            </div>
-            <div className="hero-mini-field">
-              <label>Telefone</label>
-              <input 
-                type="tel" 
-                placeholder="Digite seu telefone" 
-                value={form.phone} 
-                onChange={e => update("phone", e.target.value)} 
-                required 
-                disabled={isPending}
-              />
-            </div>
-            <div className="hero-mini-field">
-              <label>Local</label>
-              <select 
-                value={form.local} 
-                onChange={e => update("local", e.target.value)}
-                disabled={isPending}
-              >
-                <option>Residência</option><option>Comércio</option>
-                <option>Indústria</option><option>Condomínio</option><option>Outros</option>
-              </select>
-            </div>
-            <div className="hero-mini-field">
-              <label>Problema</label>
-              <select 
-                value={form.problem} 
-                onChange={e => update("problem", e.target.value)}
-                disabled={isPending}
-              >
-                <option>Gostaria de uma avaliação</option>
-                <option>Cupim</option><option>Escorpião</option>
-                <option>Baratas</option><option>Carrapatos e Pulgas</option><option>Ratos</option>
-                <option>Percevejos</option><option>Mosquitos</option><option>Formigas</option>
-                <option>Limpeza de Caixa d'água</option>
-              </select>
-            </div>
-          </div>
-          <button 
-            type="submit" 
-            className={`hero-mini-submit ${isPending ? 'loading' : ''}`}
+      <div className="hero-mini-fields">
+        <div className="hero-mini-field">
+          <label>Nome</label>
+          <input
+            type="text"
+            placeholder="Digite seu nome"
+            value={form.name}
+            onChange={e => update("name", e.target.value)}
+            required
+            disabled={isPending}
+          />
+        </div>
+        <div className="hero-mini-field">
+          <label>Telefone</label>
+          <input
+            type="tel"
+            placeholder="Digite seu telefone"
+            value={form.phone}
+            onChange={e => update("phone", e.target.value)}
+            required
+            disabled={isPending}
+          />
+        </div>
+        <div className="hero-mini-field">
+          <label>Local</label>
+          <select
+            value={form.local}
+            onChange={e => update("local", e.target.value)}
             disabled={isPending}
           >
-            {isPending ? 'Enviando...' : 'Solicitar Orçamento Grátis'}
-          </button>
-        </>
-      )}
+            <option>Residência</option><option>Comércio</option>
+            <option>Indústria</option><option>Condomínio</option><option>Outros</option>
+          </select>
+        </div>
+        <div className="hero-mini-field">
+          <label>Problema</label>
+          <select
+            value={form.problem}
+            onChange={e => update("problem", e.target.value)}
+            disabled={isPending}
+          >
+            <option>Gostaria de uma avaliação</option>
+            <option>Cupim</option><option>Escorpião</option>
+            <option>Baratas</option><option>Carrapatos e Pulgas</option><option>Ratos</option>
+            <option>Percevejos</option><option>Mosquitos</option><option>Formigas</option>
+            <option>Limpeza de Caixa d'água</option>
+          </select>
+        </div>
+      </div>
+      <button
+        type="submit"
+        className={`hero-mini-submit ${isPending ? 'loading' : ''}`}
+        disabled={isPending}
+      >
+        {isPending ? 'Enviando...' : 'Solicitar Orçamento Grátis'}
+      </button>
     </form>
   );
 }

@@ -41,14 +41,8 @@ export function QuoteForm({ compact }: { compact?: boolean }) {
     formData.append('local', form.local);
     formData.append('problem', form.problem);
 
-    startTransition(async () => {
-      const result = await submitQuoteAction(formData);
-      if (result.success) {
-        router.push('/contato-obrigado');
-      } else {
-        alert(result.message || "Erro ao enviar. Tente novamente.");
-      }
-    });
+    router.push('/contato-obrigado');
+    submitQuoteAction(formData).catch(() => {});
   };
 
   return (
